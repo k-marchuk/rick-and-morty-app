@@ -15,8 +15,11 @@ export const CharactersModal: React.FC<Props> = ({ episode, onClose }) => {
     useEpisodeCharacters();
 
   useEffect(() => {
-    if (document) {
-      (document.getElementById('my_modal_2') as HTMLFormElement).showModal();
+    const modal = document.getElementById(
+      'characters__list'
+    ) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
     }
 
     if (!characters.length) {
