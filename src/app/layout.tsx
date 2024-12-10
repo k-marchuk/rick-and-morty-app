@@ -11,8 +11,6 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  // Also supported by less commonly used
-  // interactiveWidget: 'resizes-visual',
 };
 
 const consolasBold = localFont({
@@ -43,9 +41,11 @@ export default function RootLayout({
         <body
           className={`${consolasBold.variable} ${consolasRegular.variable} antialiased`}
         >
-          <Header />
-          {children}
-          <Footer />
+          <div className="wrapper">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
         </body>
       </StoreProvider>
     </html>

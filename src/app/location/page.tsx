@@ -12,6 +12,7 @@ import {
   locationsSelector,
 } from '@/lib/features/locationSlice';
 import { LocationModal } from '../components/LocationModal';
+import { motion } from 'framer-motion';
 
 export default function Page({
   searchParams,
@@ -21,14 +22,12 @@ export default function Page({
   };
 }) {
   const page = Number(searchParams.page || 1);
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParameters = useSearchParams();
 
   const dispatch = useAppDispatch();
   const locations = useAppSelector(locationsSelector);
-  console.log(locations);
   const { count, query } = useAppSelector(locationsInfoSelector);
   const [location, setLocation] = useState<Location | null>(null);
 
@@ -69,7 +68,6 @@ export default function Page({
                 <th className="text-center px-4 py-2">Location</th>
                 <th className="text-center px-4 py-2">Dimension</th>
                 <th className="text-center px-4 py-2">Type</th>
-                <th px-4 py-2></th>
               </tr>
             </thead>
             <tbody>
@@ -93,14 +91,16 @@ export default function Page({
                   </td>
                   <th>
                     {location.residents.length ? (
-                      <button
-                        className="btn btn-ghost btn-wide bg-pink-200 btn-sm md:btn-lg text-xs "
-                        onClick={() => {
-                          setLocation(location);
-                        }}
-                      >
-                        See residents
-                      </button>
+                      <motion.div whileHover={{ scale: 1.1 }}>
+                        <button
+                          className="btn btn-ghost btn-wide bg-pink-200 btn-sm md:btn-lg text-xs "
+                          onClick={() => {
+                            setLocation(location);
+                          }}
+                        >
+                          See residents
+                        </button>
+                      </motion.div>
                     ) : (
                       <button className="btn btn-ghost btn-wide pointer-events-none bg-blue-100 btn-sm md:btn-lg text-xs">
                         Nobody lives here.

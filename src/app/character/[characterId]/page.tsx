@@ -1,6 +1,11 @@
 import { Character } from '@/app/types/Character';
 import { Episode } from '@/app/types/Episode';
 import Image from 'next/image';
+import { FaHeartbeat } from 'react-icons/fa';
+import { FaTransgender } from 'react-icons/fa';
+import { GiDna2 } from 'react-icons/gi';
+import { RiHomeHeartLine } from 'react-icons/ri';
+import { FaMapMarkedAlt } from 'react-icons/fa';
 
 export default async function Page({
   params,
@@ -22,51 +27,71 @@ export default async function Page({
   );
 
   const episodes: Episode[] = await episodesResponse.json();
-  // console.log({ episodes });
-  // console.log(character);
 
   return (
-    <div className="container mx-auto px-10 py-10 flex-col">
-      <div className="hero bg-base-100 mt-30 shadow-xl">
-        <div className="hero-content flex-col lg:flex-row">
-          <Image src={character.image} alt="Shoes" width={200} height={200} />
+    <div className="container mx-auto flex flex-col px-10 py-10">
+      <div className="hero bg-base-100 mt-10 p-8 shadow-xl">
+        <div className="hero-content flex-col lg:flex-row items-center">
+          <div className="w-full flex justify-center mb-6 lg:mb-0">
+            <Image
+              src={character.image}
+              alt={character.name}
+              width={400}
+              height={400}
+              className="shadow-lg mr-6"
+            />
+          </div>
+          <div className="w-full text-center lg:text-left">
+            <h2 className="text-4xl text-center mb-10 font-bold">
+              {character.name}
+            </h2>
 
-          <div className="card-body flex items-start">
-            <h2 className="text-4xl self-center font-bold">{character.name}</h2>
-
-            <div className="flex w-full justify-between ">
-              <div className=" text-pink-500">Status:</div>
-              <p>{character.status}</p>
-            </div>
-            <div className="flex w-full justify-between ">
-              <div className=" text-pink-500">Gender:</div>
-              <p>{character.gender}</p>
-            </div>
-            <div className="flex w-full justify-between ">
-              <div className=" text-pink-500">Species:</div>
-              <p>{character.species}</p>
-            </div>
-            <div className="flex w-full justify-between ">
-              <div className=" text-pink-500">Origin:</div>
-              <p>{character.origin.name}</p>
-            </div>
-            <div className="flex w-full justify-between ">
-              <div className=" text-pink-500">Location:</div>
-              <p>{character.location.name}</p>
+            <div className="space-y-4">
+              <div className="flex justify-between text-lg">
+                <div className="flex items-center font-semibold text-pink-500">
+                  Status
+                  <FaHeartbeat className="ml-1" />
+                </div>
+                <p>{character.status}</p>
+              </div>
+              <div className="flex justify-between text-lg">
+                <div className="flex items-center font-semibold text-pink-500">
+                  Gender <FaTransgender className="ml-1" />
+                </div>
+                <p>{character.gender}</p>
+              </div>
+              <div className="flex justify-between text-lg">
+                <div className="flex items-center font-semibold text-pink-500">
+                  Species <GiDna2 className="ml-1" />
+                </div>
+                <p>{character.species}</p>
+              </div>
+              <div className="flex justify-between text-lg">
+                <div className="flex items-center font-semibold text-pink-500">
+                  Origin <RiHomeHeartLine className="ml-1" />
+                </div>
+                <p>{character.origin.name}</p>
+              </div>
+              <div className="flex justify-between text-lg">
+                <div className="flex items-center font-semibold text-pink-500">
+                  Location <FaMapMarkedAlt className="ml-1" />
+                </div>
+                <p>{character.location.name}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex-initial w-320">
-        <div className="divider divider-success mt-10 text-2xl">
+        <div className="divider divider-success mt-10 mb-8 text-2xl">
           Featured in:
         </div>
-        <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+        <ul className="timeline timeline-snap-icon  timeline-vertical">
           {episodes.map((episode, index) => {
             return (
               <li key={episode.id}>
-                <div className="timeline-start">
+                <div className="timeline-start mr-4">
                   {episode.air_date}
                   <br></br>
                 </div>
@@ -84,7 +109,7 @@ export default async function Page({
                     />
                   </svg>
                 </div>
-                <div className="timeline-end timeline-box">
+                <div className="timeline-end ml-4 timeline-box">
                   {episode.episode}
                   {' - '}
                   {`"${episode.name}"`}

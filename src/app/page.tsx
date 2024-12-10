@@ -14,10 +14,10 @@ import { CharacterCard } from './components/CharacterCard';
 import { CharacterFilter } from './components/CharacterFilter';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
-// import Loading from './loading';
 import Image from 'next/image';
 import image from '../app/api/pickle.png';
 import { Character } from './types/Character';
+import { motion } from 'framer-motion';
 
 export default function Page({
   searchParams,
@@ -79,7 +79,17 @@ export default function Page({
   return (
     <>
       <div className="container flex flex-col mx-auto py-20 items-center">
-        <div className="flex md:flex-row min-w-full flex-col items-center md:items-start gap-10">
+        <motion.p
+          className="text-lg indent-2 md:text-3xl mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 
+    font-extrabold tracking-wide"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 25 }}
+        >
+          Meet all the iconic characters from Rick and Morty!
+        </motion.p>
+
+        <div className="flex md:flex-row  flex-col items-center md:items-start gap-10">
           <details className="dropdown md:hidden">
             <summary className="btn btn-wide bg-pink-200">
               Filters options
@@ -94,10 +104,10 @@ export default function Page({
           </div>
 
           {error ? (
-            <div className="flex flex-col items-center justify-center gap-6 p-8">
+            <div className="flex flex-col items-center justify-center gap-6 p-10">
               <Image src={image} alt="Character" width={256} height={256} />
               <div className="text-xl md:text-2xl text-gray-600 text-center">
-                <p className="mb-4 font-semibold">
+                <p className="mb-4 pt-8 font-semibold">
                   Well, this is a catastrophe.
                 </p>
                 <p className="text-gray-400">
@@ -106,33 +116,12 @@ export default function Page({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mb-12">
               {characters.map((character: Character) => (
                 <CharacterCard character={character} key={character.id} />
               ))}
             </div>
           )}
-          {/* {loading ? (
-            <Loading />
-          ) : error ? (
-            <div className="flex flex-col items-center justify-center gap-6 p-8">
-              <Image src={image} alt="Character" width={256} height={256} />
-              <div className="text-xl md:text-2xl text-gray-600 text-center">
-                <p className="mb-4 font-semibold">
-                  Well, this is a catastrophe.
-                </p>
-                <p className="text-gray-400">
-                  No results. I guess the multiverse just doesn’t care.
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-12">
-              {characters.map((character) => (
-                <CharacterCard character={character} key={character.id} />
-              ))}
-            </div>
-          )} */}
         </div>
 
         {!error && !loading && (

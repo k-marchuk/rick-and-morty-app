@@ -12,6 +12,7 @@ import { Episode } from '../types/Episode';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { CharactersModal } from '../components/EpisodeModal';
+import { motion } from 'framer-motion';
 
 export default function Page({
   searchParams,
@@ -65,10 +66,11 @@ export default function Page({
           <table className="min-w-full table-auto md:table">
             <thead>
               <tr>
-                <th className="text-center px-4 py-2">Name</th>
-                <th className="text-center px-4 py-2">Episode</th>
-                <th className="text-center px-4 py-2">Air Date</th>
-                <th px-4 py-2></th>
+                <th className="text-center text-gray-400 px-4 py-2">Name</th>
+                <th className="text-center text-gray-400 px-4 py-2">Episode</th>
+                <th className="text-center text-gray-400 px-4 py-2">
+                  Air Date
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -91,17 +93,16 @@ export default function Page({
                     {episode.air_date}
                   </td>
                   <th>
-                    <button
-                      className="btn btn-ghost bg-pink-200 btn-sm md:btn-lg text-xs "
-                      onClick={() => {
-                        // document
-                        //   .getElementById('characters__list')
-                        //   ?.showModal();
-                        setEpisode(episode);
-                      }}
-                    >
-                      See characters
-                    </button>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <button
+                        className="btn btn-ghost bg-pink-200 btn-sm md:btn-lg text-xs "
+                        onClick={() => {
+                          setEpisode(episode);
+                        }}
+                      >
+                        See characters
+                      </button>
+                    </motion.div>
                   </th>
                 </tr>
               ))}

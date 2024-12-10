@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { charactersLoadingSelector } from '@/lib/features/charactersSlice';
+import { motion } from 'framer-motion';
 
 type Props = {
   character: Character;
@@ -15,9 +16,14 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
 
   return (
     <>
-      <div
+      <motion.div
         className="card bg-base-100 shadow-xl w-60 h-100 border border-pink-200"
         key={character.id}
+        whileHover={{
+          scale: 1.1,
+          boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.15)',
+        }}
+        transition={{ duration: 0.3 }}
       >
         <figure className="px-10 pt-10">
           {loading ? (
@@ -72,16 +78,21 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
             {loading ? (
               <Skeleton containerClassName="flex-1" height={48} width={174} />
             ) : (
-              <Link
-                href={`/character/${character.id}`}
-                className="btn btn-primary text-yellow-100"
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                onHoverStart={() => console.log('hover started!')}
               >
-                Details
-              </Link>
+                <Link
+                  href={`/character/${character.id}`}
+                  className="btn btn-primary text-yellow-100"
+                >
+                  Details
+                </Link>
+              </motion.div>
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

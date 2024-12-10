@@ -13,8 +13,9 @@
   }
 }
 
+html,
 body {
-  min-height: 100vh;
+  height: 100%;
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-regular);
@@ -22,9 +23,15 @@ body {
   font-size: 14px;
 }
 
-/* .container {
-  min-height: 100vh;
-} */
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 auto;
+}
 
 @layer utilities {
   .text-balance {
@@ -154,10 +161,7 @@ body {
   cursor: pointer;
   transition: all 0.3s;
 }
-.rc-pagination-prev,
-.rc-pagination-next {
-  outline: 0;
-}
+
 .rc-pagination-prev button,
 .rc-pagination-next button {
   color: rgba(0, 0, 0, 0.85);
@@ -196,11 +200,7 @@ body {
   content: '>';
   display: block;
 }
-.rc-pagination-disabled,
-.rc-pagination-disabled:hover,
-.rc-pagination-disabled:focus {
-  cursor: not-allowed;
-}
+
 .rc-pagination-disabled .rc-pagination-item-link,
 .rc-pagination-disabled:hover .rc-pagination-item-link,
 .rc-pagination-disabled:focus .rc-pagination-item-link {
@@ -208,47 +208,7 @@ body {
   border-color: #d9d9d9;
   cursor: not-allowed;
 }
-.rc-pagination-slash {
-  margin: 0 10px 0 12px;
-}
-.rc-pagination-options {
-  display: inline-block;
-  margin-left: 16px;
-  vertical-align: middle;
-}
-@media all and (-ms-high-contrast: none) {
-  .rc-pagination-options *::-ms-backdrop,
-  .rc-pagination-options {
-    vertical-align: top;
-  }
-}
-.rc-pagination-options-size-changer.rc-select {
-  display: inline-block;
-  width: auto;
-  margin-right: 8px;
-}
-.rc-pagination-options-quick-jumper {
-  display: inline-block;
-  height: 28px;
-  line-height: 28px;
-  vertical-align: top;
-}
-.rc-pagination-options-quick-jumper input {
-  width: 50px;
-  margin: 0 8px;
-}
-.rc-pagination-simple .rc-pagination-prev,
-.rc-pagination-simple .rc-pagination-next {
-  height: 24px;
-  line-height: 24px;
-  vertical-align: top;
-}
-.rc-pagination-simple .rc-pagination-prev .rc-pagination-item-link,
-.rc-pagination-simple .rc-pagination-next .rc-pagination-item-link {
-  height: 24px;
-  background-color: transparent;
-  border: 0;
-}
+
 .rc-pagination-simple .rc-pagination-prev .rc-pagination-item-link::after,
 .rc-pagination-simple .rc-pagination-next .rc-pagination-item-link::after {
   height: 24px;
@@ -301,12 +261,7 @@ body {
   border-color: #d9d9d9;
   cursor: not-allowed;
 }
-.rc-pagination.rc-pagination-disabled .rc-pagination-item-link-icon {
-  opacity: 0;
-}
-.rc-pagination.rc-pagination-disabled .rc-pagination-item-ellipsis {
-  opacity: 1;
-}
+
 @media only screen and (max-width: 992px) {
   .rc-pagination-item-after-jump-prev,
   .rc-pagination-item-before-jump-next {

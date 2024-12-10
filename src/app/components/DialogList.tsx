@@ -2,6 +2,9 @@ import { Character } from '../types/Character';
 import Loading from '../loading';
 import { Location } from '../types/Location';
 import { Episode } from '../types/Episode';
+import Image from 'next/image';
+
+import { motion } from 'framer-motion';
 
 type Props = {
   characters: Character[];
@@ -45,16 +48,26 @@ export const DialogList: React.FC<Props> = ({
         ) : (
           <div className="grid grid-cols-3 gap-6">
             {characters.map((character) => (
-              <div
+              <motion.div
                 className="card bg-base-100 w-30 shadow-xl"
                 key={character.id}
+                whileHover={{
+                  scale: 1.15,
+                  boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.15)',
+                }}
+                transition={{ duration: 0.3 }}
               >
                 <figure>
-                  <img src={character.image} alt="Rick Morty" />
+                  <Image
+                    src={character.image}
+                    alt="Rick Morty"
+                    width={133}
+                    height={133}
+                  />
                 </figure>
 
                 <h2 className="text-sm p-2 text-center">{character.name}</h2>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

@@ -21,8 +21,6 @@ export const Header = () => {
           <Image
             className="h-15 w-20 md:h-100 md:w-300 inline"
             src={logo}
-            // width={300}
-            // height={100}
             alt="Logo Rick and Morty"
           />
         </Link>
@@ -31,7 +29,7 @@ export const Header = () => {
           <ul className="hidden md:flex">
             <li className="mx-4 my-6 md:my-0">
               <Link
-                className="text-xl hover:text-pink-500 duration-500"
+                className="text-xl hover:text-pink-500 hover:underline-offset-1 duration-300"
                 href="/episode"
               >
                 Episodes
@@ -39,7 +37,7 @@ export const Header = () => {
             </li>
             <li className="mx-4 my-6 md:my-0">
               <Link
-                className="text-xl hover:text-pink-500 duration-500"
+                className="text-xl hover:text-pink-500 hover:underline-offset-1 duration-300"
                 href="/location"
               >
                 Locations
@@ -71,7 +69,7 @@ export const Header = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             <Link
-              className="text-xl hover:text-white-500 duration-500"
+              className="text-xl hover:text-green-600 duration-300 hover:underline"
               href="/"
             >
               Home
@@ -82,7 +80,7 @@ export const Header = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             <Link
-              className="text-xl hover:text-white-500 duration-500"
+              className="text-xl hover:text-green-600 duration-300 hover:underline"
               href="/episode"
             >
               Episodes
@@ -93,7 +91,7 @@ export const Header = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             <Link
-              className="text-xl hover:text-white-500 duration-500"
+              className="text-xl hover:text-green-600 duration-300 hover:underline"
               href="/location"
             >
               Locations
@@ -102,7 +100,13 @@ export const Header = () => {
         </ul>
 
         <div className="mx-4">
-          <AiOutlineGithub size={30} />
+          <Link
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AiOutlineGithub size={30} />
+          </Link>
         </div>
       </div>
     </nav>

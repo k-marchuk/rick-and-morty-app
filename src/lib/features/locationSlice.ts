@@ -66,8 +66,6 @@ export const locationsSelector = createSelector(
   [locations],
 
   (value) => {
-    console.log(value);
-
     return value.results;
   }
 );
