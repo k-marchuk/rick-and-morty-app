@@ -14,7 +14,9 @@ export const LocationModal: React.FC<Props> = ({ location, onClose }) => {
   const [residents, error, isLoading, fetchResidents] = useLocationResidents();
 
   useEffect(() => {
-    document.getElementById('characters__list')?.showModal();
+    if (document) {
+      (document.getElementById('my_modal_2') as HTMLFormElement).showModal();
+    }
 
     if (!residents.length) {
       fetchResidents(location);
