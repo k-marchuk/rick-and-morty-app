@@ -10,6 +10,7 @@ type Props = {
   location: Location;
   onClose: () => void;
 };
+
 export const LocationModal: React.FC<Props> = ({ location, onClose }) => {
   const [residents, error, isLoading, fetchResidents] = useLocationResidents();
 

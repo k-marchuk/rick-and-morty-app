@@ -9,9 +9,8 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Pagination from 'rc-pagination';
 import { useEffect, useState } from 'react';
 import { Episode } from '../types/Episode';
-import { useRouter } from 'next/navigation';
-import { usePathname, useSearchParams } from 'next/navigation';
 import { CharactersModal } from '../components/EpisodeModal';
+import { usePaginationChange } from './../hooks/usePaginationChange';
 import { motion } from 'framer-motion';
 
 export default function Page({
@@ -23,26 +22,12 @@ export default function Page({
 }) {
   const page = Number(searchParams.page || 1);
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParameters = useSearchParams();
-
   const dispatch = useAppDispatch();
   const episodes = useAppSelector(episodesSelector);
+  const { handlePaginationChange } = usePaginationChange();
+
   const { count, query } = useAppSelector(episodesInfoSelector);
   const [episode, setEpisode] = useState<Episode | null>(null);
-
-  function handlePaginationChange(currentPage: number) {
-    const updatedParams = new URLSearchParams(searchParameters.toString());
-    updatedParams.set('page', currentPage.toString());
-    router.push(pathname + '?' + updatedParams.toString());
-
-    const params = new URLSearchParams({
-      page: currentPage.toString(),
-    });
-
-    fetchEpisodes(params.toString());
-  }
 
   useEffect(() => {
     const params = new URLSearchParams({

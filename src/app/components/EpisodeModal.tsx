@@ -10,6 +10,7 @@ type Props = {
   episode: Episode;
   onClose: () => void;
 };
+
 export const CharactersModal: React.FC<Props> = ({ episode, onClose }) => {
   const [characters, error, isLoading, fetchCharacters] =
     useEpisodeCharacters();

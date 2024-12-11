@@ -1,10 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import logo from '../api/image.webp';
+import logo from '/public/images/image.webp';
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose, AiOutlineGithub } from 'react-icons/ai';
-
 import { useState } from 'react';
 
 export const Header = () => {

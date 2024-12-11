@@ -12,12 +12,11 @@ import { useEffect } from 'react';
 import Pagination from 'rc-pagination';
 import { CharacterCard } from './components/CharacterCard';
 import { CharacterFilter } from './components/CharacterFilter';
-import { useRouter } from 'next/navigation';
-import { usePathname, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import image from '../app/api/pickle.png';
+import image from '/public/images/pickle.png';
 import { Character } from './types/Character';
 import { motion } from 'framer-motion';
+import { usePaginationChange } from './hooks/usePaginationChange';
 
 export default function Page({
   searchParams,
@@ -36,33 +35,17 @@ export default function Page({
   const name = searchParams.name || '';
   const species = searchParams.species || '';
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParameters = useSearchParams();
-
   const dispatch = useAppDispatch();
   const characters = useAppSelector(charactersSelector);
   const loading = useAppSelector(charactersLoadingSelector);
   const error = useAppSelector(charactersErrorSelector);
   const { count, query } = useAppSelector(charactersInfoSelector);
+  const { handlePaginationChange } = usePaginationChange();
 
-  function handlePaginationChange(currentPage: number) {
-    const updatedParams = new URLSearchParams(searchParameters.toString());
-    updatedParams.set('page', currentPage.toString());
-    router.push(pathname + '?' + updatedParams.toString());
-
-    const params = new URLSearchParams({
-      page: currentPage.toString(),
-      status: status,
-      gender: gender,
-      name: name,
-      species: species,
-    });
-
-    dispatch(fetchCharacters(params.toString()));
-  }
+  console.log('object');
 
   useEffect(() => {
+    console.log('useeffect');
     const params = new URLSearchParams({
       page: page.toString(),
       status: status,
@@ -72,6 +55,7 @@ export default function Page({
     });
 
     if (!characters.length || query !== params.toString()) {
+      console.log('disptach');
       dispatch(fetchCharacters(params.toString()));
     }
   }, [characters, page, query, status, gender, name, species, dispatch]);

@@ -4,8 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Pagination from 'rc-pagination';
 import { useEffect, useState } from 'react';
 import { Location } from '../types/Location';
-import { useRouter } from 'next/navigation';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePaginationChange } from './../hooks/usePaginationChange';
 import {
   fetchLocations,
   locationsInfoSelector,
@@ -22,26 +21,12 @@ export default function Page({
   };
 }) {
   const page = Number(searchParams.page || 1);
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParameters = useSearchParams();
 
   const dispatch = useAppDispatch();
   const locations = useAppSelector(locationsSelector);
   const { count, query } = useAppSelector(locationsInfoSelector);
   const [location, setLocation] = useState<Location | null>(null);
-
-  function handlePaginationChange(currentPage: number) {
-    const updatedParams = new URLSearchParams(searchParameters.toString());
-    updatedParams.set('page', currentPage.toString());
-    router.push(pathname + '?' + updatedParams.toString());
-
-    const params = new URLSearchParams({
-      page: currentPage.toString(),
-    });
-
-    fetchLocations(params.toString());
-  }
+  const { handlePaginationChange } = usePaginationChange();
 
   useEffect(() => {
     const params = new URLSearchParams({

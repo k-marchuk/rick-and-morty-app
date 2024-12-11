@@ -5,6 +5,7 @@ import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
 import './globals.css';
 import type { Viewport } from 'next';
+import Head from 'next/head';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -38,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <StoreProvider>
+        <Head>{children}</Head>
         <body
           className={`${consolasBold.variable} ${consolasRegular.variable} antialiased`}
         >
