@@ -8,7 +8,6 @@ import { useState } from 'react';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };

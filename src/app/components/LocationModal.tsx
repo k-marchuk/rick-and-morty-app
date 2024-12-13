@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { Location } from '../types/Location';
 import { DialogList } from './DialogList';
 import useLocationResidents from '../hooks/useLocationResidents';
-import Loading from '../loading';
 
 type Props = {
   location: Location;
@@ -15,7 +14,7 @@ export const LocationModal: React.FC<Props> = ({ location, onClose }) => {
   const [residents, error, isLoading, fetchResidents] = useLocationResidents();
 
   useEffect(() => {
-    if (document) {
+    if (document && residents.length) {
       (
         document.getElementById('characters__list') as HTMLDialogElement
       ).showModal();
@@ -27,20 +26,14 @@ export const LocationModal: React.FC<Props> = ({ location, onClose }) => {
   }, [residents.length, location, fetchResidents]);
 
   return (
-    <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <DialogList
-          characters={residents}
-          title={'Location:'}
-          subTitle={'All residents:'}
-          location={location}
-          onClose={onClose}
-          isLoading={isLoading}
-          error={error}
-        />
-      )}
-    </>
+    <DialogList
+      characters={residents}
+      title={'Location:'}
+      subTitle={'All residents:'}
+      location={location}
+      onClose={onClose}
+      isLoading={isLoading}
+      error={error}
+    />
   );
 };

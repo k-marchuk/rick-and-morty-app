@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import useEpisodeCharacters from '../hooks/useEpisodeCharacters';
-import Loading from '../loading';
 import { Episode } from '../types/Episode';
 import { DialogList } from './DialogList';
 
@@ -29,20 +28,14 @@ export const CharactersModal: React.FC<Props> = ({ episode, onClose }) => {
   }, [characters.length, episode, fetchCharacters]);
 
   return (
-    <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <DialogList
-          characters={characters}
-          title={'Episode:'}
-          subTitle={'All characters:'}
-          episode={episode}
-          onClose={onClose}
-          isLoading={isLoading}
-          error={error}
-        />
-      )}
-    </>
+    <DialogList
+      characters={characters}
+      title={'Episode:'}
+      subTitle={'All characters:'}
+      episode={episode}
+      onClose={onClose}
+      isLoading={isLoading}
+      error={error}
+    />
   );
 };

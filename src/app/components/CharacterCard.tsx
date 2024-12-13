@@ -78,10 +78,7 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
             {loading ? (
               <Skeleton containerClassName="flex-1" height={48} width={174} />
             ) : (
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                onHoverStart={() => console.log('hover started!')}
-              >
+              <motion.div whileHover={{ scale: 1.1 }}>
                 <Link
                   href={`/character/${character.id}`}
                   className="btn btn-primary text-yellow-100"

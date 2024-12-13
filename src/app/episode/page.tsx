@@ -60,7 +60,16 @@ export default function Page({
             </thead>
             <tbody>
               {episodes.map((episode) => (
-                <tr key={episode.id} className="text-xl">
+                <motion.tr
+                  key={episode.id}
+                  className="text-xl opacity-0"
+                  animate={{ opacity: 1, transition: { duration: 1 } }}
+                  whileHover={{
+                    scale: 1,
+                    boxShadow: '5px 10px 5px rgba(0, 0, 0, 0.1)',
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
                   <td>
                     <div className="flex items-center gap-3 ">
                       <div>
@@ -89,7 +98,7 @@ export default function Page({
                       </button>
                     </motion.div>
                   </th>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>

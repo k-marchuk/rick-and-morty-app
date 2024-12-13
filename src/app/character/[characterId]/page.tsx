@@ -6,6 +6,8 @@ import { FaTransgender } from 'react-icons/fa';
 import { GiDna2 } from 'react-icons/gi';
 import { RiHomeHeartLine } from 'react-icons/ri';
 import { FaMapMarkedAlt } from 'react-icons/fa';
+import { BASE_URL } from '@/app/services/fetchClient';
+import { Path } from '@/app/types/UrlPath';
 
 export default async function Page({
   params,
@@ -13,7 +15,7 @@ export default async function Page({
   params: { characterId: string };
 }) {
   const characterResponse = await fetch(
-    `https://rickandmortyapi.com/api/character/${params.characterId}`
+    `${BASE_URL}/${Path.Character}/${params.characterId}`
   );
 
   const character: Character = await characterResponse.json();
@@ -23,7 +25,7 @@ export default async function Page({
     .join();
 
   const episodesResponse = await fetch(
-    `https://rickandmortyapi.com/api/episode/[${episodesId}]`
+    `${BASE_URL}/${Path.Episode}/[${episodesId}]`
   );
 
   const episodes: Episode[] = await episodesResponse.json();
@@ -70,13 +72,13 @@ export default async function Page({
                 <div className="flex items-center font-semibold text-pink-500">
                   Origin <RiHomeHeartLine className="ml-1" />
                 </div>
-                <p>{character.origin.name}</p>
+                <p className="text-right">{character.origin.name}</p>
               </div>
               <div className="flex justify-between text-lg">
                 <div className="flex items-center font-semibold text-pink-500">
                   Location <FaMapMarkedAlt className="ml-1" />
                 </div>
-                <p>{character.location.name}</p>
+                <p className="text-right">{character.location.name}</p>
               </div>
             </div>
           </div>
