@@ -29,7 +29,8 @@ export const LocationModal: React.FC<Props> = ({ location, onClose }) => {
     <DialogList
       characters={residents}
       title={'Location:'}
-      subTitle={'All residents:'}
+      subTitle={'Dimension:'}
+      caption={'All residents:'}
       location={location}
       onClose={onClose}
       isLoading={isLoading}

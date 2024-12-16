@@ -14,6 +14,7 @@ type Props = {
   onClose: () => void;
   isLoading: boolean;
   error: string;
+  caption: string;
   subTitle: string;
 };
 
@@ -24,8 +25,11 @@ export const DialogList: React.FC<Props> = ({
   episode,
   onClose,
   isLoading,
+  caption,
   subTitle,
 }) => {
+  const preparedLocationName = location?.name.split('(')[0].trim();
+
   return (
     <dialog id="characters__list" className="modal">
       <div className="modal-box">
@@ -37,12 +41,17 @@ export const DialogList: React.FC<Props> = ({
             ✕
           </button>
         </form>
-        <h3 className="font-bold text-2xl pr-3">
+        <h3 className="font-bold text-2xl pr-3 underline">
           {location
-            ? `${title} "${location.name}"`
+            ? `${title} "${preparedLocationName}"`
             : `${title} "${episode?.name}"`}
         </h3>
-        <h3 className="font-bold text-center text-lg p-4">{subTitle}</h3>
+        <h3 className="font-bold text-xl pr-3 pt-2">
+          {location
+            ? `${subTitle} "${location.dimension}"`
+            : `${subTitle} "${episode?.air_date}"`}
+        </h3>
+        <h3 className="font-bold text-center text-lg p-4">{caption}</h3>
         {isLoading ? (
           <Loading />
         ) : (

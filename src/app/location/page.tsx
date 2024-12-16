@@ -47,12 +47,16 @@ export default function Page({
           </div>
         </div>
         <div className="overflow-x-auto w-full mb-10">
-          <table className="min-w-full table-auto md:table">
+          <table className="min-w-full table-auto md:table border-separate border-spacing-y-4 md:border-spacing-y-1">
             <thead>
               <tr>
                 <th className="text-center px-4 py-2">Location</th>
-                <th className="text-center px-4 py-2">Dimension</th>
-                <th className="text-center px-4 py-2">Type</th>
+                <th className="hidden md:table-cell text-center px-4 py-2">
+                  Dimension
+                </th>
+                <th className="hidden md:table-cell text-center px-4 py-2">
+                  Type
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -70,33 +74,33 @@ export default function Page({
                   <td>
                     <div className="flex items-center gap-3 ">
                       <div>
-                        <div className="font-bold text-base md:text-2xl">
+                        <div className="font-bold text-xl md:text-2xl">
                           {location.name}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-2 text-base md:text-2xl">
+                  <td className="hidden md:table-cell px-4 py-2 text-base md:text-2xl">
                     {location.dimension}
                     <br />
                   </td>
-                  <td className="px-4 py-2 text-base md:text-2xl">
+                  <td className="hidden md:table-cell px-4 py-2 text-base md:text-2xl">
                     {location.type}
                   </td>
                   <th>
                     {location.residents.length ? (
                       <motion.div whileHover={{ scale: 1.1 }}>
                         <button
-                          className="btn btn-ghost btn-wide bg-pink-200 btn-sm md:btn-lg text-xs "
+                          className="btn btn-ghost  bg-pink-200 btn-sm md:btn-lg text-md"
                           onClick={() => {
                             setLocation(location);
                           }}
                         >
-                          See residents
+                          See all residents
                         </button>
                       </motion.div>
                     ) : (
-                      <button className="btn btn-ghost btn-wide pointer-events-none bg-blue-100 btn-sm md:btn-lg text-xs">
+                      <button className="btn btn-ghost pointer-events-none bg-blue-100 btn-sm md:btn-lg text-md">
                         Nobody lives here.
                       </button>
                     )}

@@ -48,12 +48,14 @@ export default function Page({
           </div>
         </div>
         <div className="overflow-x-auto w-full mb-10">
-          <table className="min-w-full table-auto md:table">
+          <table className="min-w-full table-auto md:table border-separate border-spacing-y-4 md:border-spacing-y-1">
             <thead>
               <tr>
                 <th className="text-center text-gray-400 px-4 py-2">Name</th>
-                <th className="text-center text-gray-400 px-4 py-2">Episode</th>
-                <th className="text-center text-gray-400 px-4 py-2">
+                <th className="hidden md:table-cell text-center text-gray-400 px-4 py-2">
+                  Episode
+                </th>
+                <th className="hidden md:table-cell text-center text-gray-400 px-4 py-2">
                   Air Date
                 </th>
               </tr>
@@ -62,7 +64,7 @@ export default function Page({
               {episodes.map((episode) => (
                 <motion.tr
                   key={episode.id}
-                  className="text-xl opacity-0"
+                  className="text-xl opacity-0 m-4"
                   animate={{ opacity: 1, transition: { duration: 1 } }}
                   whileHover={{
                     scale: 1,
@@ -73,23 +75,23 @@ export default function Page({
                   <td>
                     <div className="flex items-center gap-3 ">
                       <div>
-                        <div className="font-bold text-base md:text-2xl">
+                        <div className="font-bold text-xl md:text-2xl">
                           {episode.name}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-2 text-base md:text-2xl">
+                  <td className="hidden md:table-cell px-4 py-2 text-base md:text-2xl">
                     {episode.episode}
                     <br />
                   </td>
-                  <td className="px-4 py-2 text-base md:text-2xl">
+                  <td className="hidden md:table-cell px-4 py-2 text-base md:text-2xl">
                     {episode.air_date}
                   </td>
                   <th>
                     <motion.div whileHover={{ scale: 1.1 }}>
                       <button
-                        className="btn btn-ghost bg-pink-200 btn-sm md:btn-lg text-xs "
+                        className="btn btn-ghost bg-pink-200 btn-sm md:btn-lg text-md"
                         onClick={() => {
                           setEpisode(episode);
                         }}

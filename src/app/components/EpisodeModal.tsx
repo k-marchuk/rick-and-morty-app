@@ -31,7 +31,8 @@ export const CharactersModal: React.FC<Props> = ({ episode, onClose }) => {
     <DialogList
       characters={characters}
       title={'Episode:'}
-      subTitle={'All characters:'}
+      subTitle={'Air date:'}
+      caption={'All characters:'}
       episode={episode}
       onClose={onClose}
       isLoading={isLoading}
